@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://1946dream.github.io/</id>
     <title>ChongMeng</title>
-    <updated>2021-08-14T09:25:40.217Z</updated>
+    <updated>2021-08-14T10:46:55.248Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://1946dream.github.io/"/>
     <link rel="self" href="https://1946dream.github.io/atom.xml"/>
@@ -11,35 +11,123 @@
     <icon>https://1946dream.github.io/favicon.ico</icon>
     <rights>All rights reserved 2021, ChongMeng</rights>
     <entry>
-        <title type="html"><![CDATA[Hello Gridea]]></title>
-        <id>https://1946dream.github.io/post/hello-gridea/</id>
-        <link href="https://1946dream.github.io/post/hello-gridea/">
+        <title type="html"><![CDATA[某山V9+终端安全系统产品]]></title>
+        <id>https://1946dream.github.io/post/mou-shan-v9zhong-duan-an-quan-xi-tong-chan-pin/</id>
+        <link href="https://1946dream.github.io/post/mou-shan-v9zhong-duan-an-quan-xi-tong-chan-pin/">
         </link>
-        <updated>2018-12-11T16:00:00.000Z</updated>
-        <summary type="html"><![CDATA[<p>👏  欢迎使用 <strong>Gridea</strong> ！<br>
-✍️  <strong>Gridea</strong> 一个静态博客写作客户端。你可以用它来记录你的生活、心情、知识、笔记、创意... ...</p>
-]]></summary>
-        <content type="html"><![CDATA[<p>👏  欢迎使用 <strong>Gridea</strong> ！<br>
-✍️  <strong>Gridea</strong> 一个静态博客写作客户端。你可以用它来记录你的生活、心情、知识、笔记、创意... ...</p>
-<!-- more -->
-<p><a href="https://github.com/getgridea/gridea">Github</a><br>
-<a href="https://gridea.dev/">Gridea 主页</a><br>
-<a href="http://fehey.com/">示例网站</a></p>
-<h2 id="特性">特性👇</h2>
-<p>📝  你可以使用最酷的 <strong>Markdown</strong> 语法，进行快速创作</p>
-<p>🌉  你可以给文章配上精美的封面图和在文章任意位置插入图片</p>
-<p>🏷️  你可以对文章进行标签分组</p>
-<p>📋  你可以自定义菜单，甚至可以创建外部链接菜单</p>
-<p>💻  你可以在 <strong>Windows</strong>，<strong>MacOS</strong> 或 <strong>Linux</strong> 设备上使用此客户端</p>
-<p>🌎  你可以使用 <strong>𝖦𝗂𝗍𝗁𝗎𝖻 𝖯𝖺𝗀𝖾𝗌</strong> 或 <strong>Coding Pages</strong> 向世界展示，未来将支持更多平台</p>
-<p>💬  你可以进行简单的配置，接入 <a href="https://github.com/gitalk/gitalk">Gitalk</a> 或 <a href="https://github.com/SukkaW/DisqusJS">DisqusJS</a> 评论系统</p>
-<p>🇬🇧  你可以使用<strong>中文简体</strong>或<strong>英语</strong></p>
-<p>🌁  你可以任意使用应用内默认主题或任意第三方主题，强大的主题自定义能力</p>
-<p>🖥  你可以自定义源文件夹，利用 OneDrive、百度网盘、iCloud、Dropbox 等进行多设备同步</p>
-<p>🌱 当然 <strong>Gridea</strong> 还很年轻，有很多不足，但请相信，它会不停向前 🏃</p>
-<p>未来，它一定会成为你离不开的伙伴</p>
-<p>尽情发挥你的才华吧！</p>
-<p>😘 Enjoy~</p>
+        <updated>2021-08-14T09:46:53.000Z</updated>
+        <content type="html"><![CDATA[<h1 id="历史漏洞">👟历史漏洞</h1>
+<blockquote>
+<p>https://forum.butian.net/share/76 (不是此漏洞)</p>
+</blockquote>
+<h1 id="下载地址">🌂下载地址</h1>
+<blockquote>
+<p>http://www.ejinshan.net/lywz/zdv9</p>
+</blockquote>
+<h1 id="漏洞">漏洞</h1>
+<p>路径：\inter\software_relation.php</p>
+<pre><code>&lt;?php
+set_time_limit(0);
+date_default_timezone_set(&quot;Asia/Shanghai&quot;);
+require_once &quot;./use_db.php&quot;;
+session_start();
+//储存信息到数据库sc_software_items
+$id=$_POST[&quot;id&quot;];						//软件名
+$toolNames=$_POST[&quot;toolName&quot;];			//软件名
+$toolFileName=$_POST[&quot;toolFileName&quot;];	//文件名称.exe
+$toolDescri=$_POST[&quot;toolDescri&quot;];		//描述
+$version=$_POST[&quot;version&quot;];				//版本号
+$size=$_POST['fileSize'];				//大小
+$arr_softwarekey=$_POST['seilist'];		//关联的软件
+$type= $_POST['sofe_typeof'];			//软件的类型
+$param= isset($_POST['param']) ?$_POST['param'] : &quot;&quot;; //参数
+$update_time=time();
+
+function iconvCharset($fields){
+	//$out_string = mb_detect_encoding($fields, array(&quot;GBK&quot;,&quot;ASCII&quot;, &quot;UTF-8&quot;, &quot;GB2312&quot;,  &quot;BIG5&quot;));
+	$out_string = &quot;GBK&quot;;
+	$out_string .= &quot;//IGNORE&quot;; 
+	// return $fields;
+	if (PHP_OS == 'Linux') {
+		return iconv(&quot;UTF-8&quot;,&quot;GBK//IGNORE&quot;, $fields);
+	}else{
+		return iconv(&quot;UTF-8&quot;,$out_string,$fields);
+	}
+}
+
+$gb2312_filename = $toolFileName;  //iconv(&quot;UTF-8&quot;, &quot;GB2312&quot;,$toolFileName);
+$file_path = &quot;../softmanagement/files/{$toolFileName}&quot;;
+$file_path_ = &quot;../softmanagement/files/{$gb2312_filename}&quot;;
+$_SESSION['name']=$toolFileName;
+$_SESSION['time']=time();
+$_SESSION['version']=$version;
+$toolFileName=$version.'.'.$gb2312_filename;
+@mkdir(&quot;../softmanagement/download&quot;);
+$download_file = &quot;../softmanagement/download/&quot;;
+$file_name=$download_file.$toolFileName;
+$photo_name=$download_file.iconv(&quot;UTF-8&quot;, &quot;GB2312&quot;,$_FILES['toolImage']['name']);
+
+$sql_type=&quot;select type_name from  type_software where type_id='$type' &quot;;
+$type_res=$mysqlDB-&gt;query($sql_type);
+foreach ($type_res as $value) {
+	$type_name=$value['type_name'];
+}
+try {	
+	$file_name = iconvCharset($file_name);
+	$file_path = iconvCharset($file_path);
+	if ($id=='' or $id==null or $id==0 or !isset($_POST[&quot;id&quot;])) {
+		// $id为空表示上传
+		if (copy($file_path,$file_name) || copy($file_path_, $file_name)) {
+			//默认图片
+			$photo_file='default.png';
+			if($_FILES['toolImage']['tmp_name'] != ''){
+				if (move_uploaded_file($_FILES['toolImage']['tmp_name'],$ )) {
+					$photo_file=$_FILES['toolImage']['name'];
+				}else{
+					echo json_encode(&quot;move photo file failed&quot;);
+					exit();
+				}	
+			}
+</code></pre>
+<p>这里重点关注<br>
+<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>t</mi><mi>o</mi><mi>o</mi><mi>l</mi><mi>F</mi><mi>i</mi><mi>l</mi><mi>e</mi><mi>N</mi><mi>a</mi><mi>m</mi><mi>e</mi><mo>=</mo></mrow><annotation encoding="application/x-tex">toolFileName=</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.69444em;vertical-align:0em;"></span><span class="mord mathdefault">t</span><span class="mord mathdefault">o</span><span class="mord mathdefault">o</span><span class="mord mathdefault" style="margin-right:0.01968em;">l</span><span class="mord mathdefault" style="margin-right:0.13889em;">F</span><span class="mord mathdefault">i</span><span class="mord mathdefault" style="margin-right:0.01968em;">l</span><span class="mord mathdefault">e</span><span class="mord mathdefault" style="margin-right:0.10903em;">N</span><span class="mord mathdefault">a</span><span class="mord mathdefault">m</span><span class="mord mathdefault">e</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span></span></span></span>_POST[&quot;toolFileName&quot;];<br>
+$gb2312_filename = $toolFileName;</p>
+]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[学习代码审计系列-通达OA]]></title>
+        <id>https://1946dream.github.io/post/xue-xi-dai-ma-shen-ji-xi-lie-tong-da-oa/</id>
+        <link href="https://1946dream.github.io/post/xue-xi-dai-ma-shen-ji-xi-lie-tong-da-oa/">
+        </link>
+        <updated>2021-08-14T09:33:44.000Z</updated>
+        <content type="html"><![CDATA[<blockquote>
+<p>先把标题列上慢慢补充。</p>
+</blockquote>
+<h1 id="版本号">🎩版本号</h1>
+<p>OA内部版本号对应说明：<br>
+11.x为11.0版本，<br>
+10.x为2017版，9.x为2016版，<br>
+8.x为2015版，<br>
+7.x为2013增强版，<br>
+6.x为2013版，<br>
+5.1为2011增强版，<br>
+5.0为2011版，<br>
+3.6为2010版，<br>
+3.5为2009版，<br>
+3.4为2008增强版，<br>
+3.3为2008版，<br>
+3.2为2007第二版，<br>
+3.1为2007第一版。</p>
+<h1 id="源码下载">👓源码下载</h1>
+<p>https://cdndown.tongda2000.com/oa/2019/TDOA11.1.exe<br>
+https://cdndown.tongda2000.com/oa/2019/TDOA11.2.exe<br>
+https://cdndown.tongda2000.com/oa/2019/TDOA11.3.exe<br>
+https://cdndown.tongda2000.com/oa/2019/TDOA11.4.exe<br>
+https://cdndown.tongda2000.com/oa/2019/TDOA11.5.exe<br>
+https://cdndown.tongda2000.com/oa/2019/TDOA11.6.exe<br>
+https://cdndown.tongda2000.com/oa/2019/TDOA11.7.exe<br>
+https://cdndown.tongda2000.com/oa/2019/TDOA11.8.exe<br>
+https://cdndown.tongda2000.com/oa/2019/TDOA11.9.exe</p>
 ]]></content>
     </entry>
 </feed>
