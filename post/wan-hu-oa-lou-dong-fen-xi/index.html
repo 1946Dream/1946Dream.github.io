@@ -1,22 +1,98 @@
-<?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom">
-    <id>https://1946dream.github.io/</id>
-    <title>ChongMeng</title>
-    <updated>2021-08-15T03:37:31.580Z</updated>
-    <generator>https://github.com/jpmonette/feed</generator>
-    <link rel="alternate" href="https://1946dream.github.io/"/>
-    <link rel="self" href="https://1946dream.github.io/atom.xml"/>
-    <subtitle>11111111111111111111</subtitle>
-    <logo>https://1946dream.github.io/images/avatar.png</logo>
-    <icon>https://1946dream.github.io/favicon.ico</icon>
-    <rights>All rights reserved 2021, ChongMeng</rights>
-    <entry>
-        <title type="html"><![CDATA[万户OA-漏洞分析]]></title>
-        <id>https://1946dream.github.io/post/wan-hu-oa-lou-dong-fen-xi/</id>
-        <link href="https://1946dream.github.io/post/wan-hu-oa-lou-dong-fen-xi/">
-        </link>
-        <updated>2021-08-14T15:18:26.000Z</updated>
-        <content type="html"><![CDATA[<h1 id="漏洞">😀漏洞</h1>
+<html>
+  <head>
+    <meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>万户OA-漏洞分析 | ChongMeng</title>
+<link rel="shortcut icon" href="https://1946dream.github.io//favicon.ico?v=1628998606292">
+<link href="https://cdn.jsdelivr.net/npm/remixicon@2.3.0/fonts/remixicon.css" rel="stylesheet">
+<link rel="stylesheet" href="https://1946dream.github.io//styles/main.css">
+<link rel="alternate" type="application/atom+xml" title="万户OA-漏洞分析 | ChongMeng - Atom Feed" href="https://1946dream.github.io//atom.xml">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Droid+Serif:400,700">
+
+
+
+    <meta name="description" content="😀漏洞
+😀Getshell-1：
+EXP:(shell路径为：/defaultroot/upload/html/)
+POST /defaultroot/upload/fileUpload.controller HTTP/1.1
+User..." />
+    <meta name="keywords" content="" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css">
+    <script src="https://cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script>
+  </head>
+  <body>
+    <div class="main">
+      <div class="main-content">
+        <div class="site-header">
+  <a href="https://1946dream.github.io/">
+  <img class="avatar" src="https://1946dream.github.io//images/avatar.png?v=1628998606292" alt="">
+  </a>
+  <h1 class="site-title">
+    ChongMeng
+  </h1>
+  <p class="site-description">
+    11111111111111111111
+  </p>
+  <div class="menu-container">
+    
+      
+        <a href="/" class="menu">
+          首页
+        </a>
+      
+    
+      
+        <a href="/archives" class="menu">
+          归档
+        </a>
+      
+    
+      
+        <a href="/tags" class="menu">
+          标签
+        </a>
+      
+    
+      
+        <a href="/post/about" class="menu">
+          关于
+        </a>
+      
+    
+  </div>
+  <div class="social-container">
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+  </div>
+</div>
+
+        <div class="post-detail">
+          <article class="post">
+            <h2 class="post-title">
+              万户OA-漏洞分析
+            </h2>
+            <div class="post-info">
+              <span>
+                2021-08-14
+              </span>
+              <span>
+                11 min read
+              </span>
+              
+            </div>
+            
+            <div class="post-content-wrapper">
+              <div class="post-content">
+                <h1 id="漏洞">😀漏洞</h1>
 <h2 id="getshell-1">😀Getshell-1：</h2>
 <h4 id="expshell路径为defaultrootuploadhtml">EXP:(shell路径为：/defaultroot/upload/html/)</h4>
 <pre><code>POST /defaultroot/upload/fileUpload.controller HTTP/1.1
@@ -284,126 +360,102 @@ MsgFileSave函数源码</p>
 </code></pre>
 <p>我们有时候在跟 this._$289是什么函数，假设猜测 BlockBuf就是我们传入的170，BlockSize 就是我们传入的9<br>
 然后写到 我们传入的 Filename 文件路径内。造成文件上传Getshell</p>
-]]></content>
-    </entry>
-    <entry>
-        <title type="html"><![CDATA[某山V9+终端安全系统产品]]></title>
-        <id>https://1946dream.github.io/post/mou-shan-v9zhong-duan-an-quan-xi-tong-chan-pin/</id>
-        <link href="https://1946dream.github.io/post/mou-shan-v9zhong-duan-an-quan-xi-tong-chan-pin/">
-        </link>
-        <updated>2021-08-14T09:46:53.000Z</updated>
-        <content type="html"><![CDATA[<h1 id="历史漏洞">👟历史漏洞</h1>
-<blockquote>
-<p>https://forum.butian.net/share/76 (不是此漏洞)</p>
-</blockquote>
-<h1 id="下载地址">🌂下载地址</h1>
-<blockquote>
-<p>http://www.ejinshan.net/lywz/zdv9</p>
-</blockquote>
-<h1 id="漏洞">漏洞</h1>
-<p>路径：\inter\software_relation.php</p>
-<pre><code>&lt;?php
-set_time_limit(0);
-date_default_timezone_set(&quot;Asia/Shanghai&quot;);
-require_once &quot;./use_db.php&quot;;
-session_start();
-//储存信息到数据库sc_software_items
-$id=$_POST[&quot;id&quot;];						//软件名
-$toolNames=$_POST[&quot;toolName&quot;];			//软件名
-$toolFileName=$_POST[&quot;toolFileName&quot;];	//文件名称.exe
-$toolDescri=$_POST[&quot;toolDescri&quot;];		//描述
-$version=$_POST[&quot;version&quot;];				//版本号
-$size=$_POST['fileSize'];				//大小
-$arr_softwarekey=$_POST['seilist'];		//关联的软件
-$type= $_POST['sofe_typeof'];			//软件的类型
-$param= isset($_POST['param']) ?$_POST['param'] : &quot;&quot;; //参数
-$update_time=time();
 
-function iconvCharset($fields){
-	//$out_string = mb_detect_encoding($fields, array(&quot;GBK&quot;,&quot;ASCII&quot;, &quot;UTF-8&quot;, &quot;GB2312&quot;,  &quot;BIG5&quot;));
-	$out_string = &quot;GBK&quot;;
-	$out_string .= &quot;//IGNORE&quot;; 
-	// return $fields;
-	if (PHP_OS == 'Linux') {
-		return iconv(&quot;UTF-8&quot;,&quot;GBK//IGNORE&quot;, $fields);
-	}else{
-		return iconv(&quot;UTF-8&quot;,$out_string,$fields);
-	}
-}
+              </div>
+              <div class="toc-container">
+                <ul class="markdownIt-TOC">
+<li><a href="#%E6%BC%8F%E6%B4%9E">😀漏洞</a>
+<ul>
+<li><a href="#getshell-1">😀Getshell-1：</a><br>
+*
+<ul>
+<li><a href="#expshell%E8%B7%AF%E5%BE%84%E4%B8%BAdefaultrootuploadhtml">EXP:(shell路径为：/defaultroot/upload/html/)</a></li>
+</ul>
+</li>
+<li><a href="#getshell-2">😀Getshell-2：</a><br>
+*
+<ul>
+<li><a href="#expshell%E8%B7%AF%E5%BE%84%E4%B8%BAhttpipdefaultroot1txt">EXP:(shell路径为：http://IP/defaultroot/1.txt)</a></li>
+</ul>
+</li>
+<li><a href="#%E9%AB%98%E6%9D%83%E9%99%90%E7%94%A8%E6%88%B7sql%E6%B3%A8%E5%85%A5-3">😀高权限用户sql注入-3：</a><br>
+*
+<ul>
+<li><a href="#exp">EXP:</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#%E6%BC%8F%E6%B4%9E%E5%88%86%E6%9E%90-getshell">🤓漏洞分析-Getshell</a></li>
+</ul>
 
-$gb2312_filename = $toolFileName;  //iconv(&quot;UTF-8&quot;, &quot;GB2312&quot;,$toolFileName);
-$file_path = &quot;../softmanagement/files/{$toolFileName}&quot;;
-$file_path_ = &quot;../softmanagement/files/{$gb2312_filename}&quot;;
-$_SESSION['name']=$toolFileName;
-$_SESSION['time']=time();
-$_SESSION['version']=$version;
-$toolFileName=$version.'.'.$gb2312_filename;
-@mkdir(&quot;../softmanagement/download&quot;);
-$download_file = &quot;../softmanagement/download/&quot;;
-$file_name=$download_file.$toolFileName;
-$photo_name=$download_file.iconv(&quot;UTF-8&quot;, &quot;GB2312&quot;,$_FILES['toolImage']['name']);
+              </div>
+            </div>
+          </article>
+        </div>
 
-$sql_type=&quot;select type_name from  type_software where type_id='$type' &quot;;
-$type_res=$mysqlDB-&gt;query($sql_type);
-foreach ($type_res as $value) {
-	$type_name=$value['type_name'];
-}
-try {	
-	$file_name = iconvCharset($file_name);
-	$file_path = iconvCharset($file_path);
-	if ($id=='' or $id==null or $id==0 or !isset($_POST[&quot;id&quot;])) {
-		// $id为空表示上传
-		if (copy($file_path,$file_name) || copy($file_path_, $file_name)) {
-			//默认图片
-			$photo_file='default.png';
-			if($_FILES['toolImage']['tmp_name'] != ''){
-				if (move_uploaded_file($_FILES['toolImage']['tmp_name'],$ )) {
-					$photo_file=$_FILES['toolImage']['name'];
-				}else{
-					echo json_encode(&quot;move photo file failed&quot;);
-					exit();
-				}	
-			}
-</code></pre>
-<p>这里重点关注<br>
-<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>t</mi><mi>o</mi><mi>o</mi><mi>l</mi><mi>F</mi><mi>i</mi><mi>l</mi><mi>e</mi><mi>N</mi><mi>a</mi><mi>m</mi><mi>e</mi><mo>=</mo></mrow><annotation encoding="application/x-tex">toolFileName=</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.69444em;vertical-align:0em;"></span><span class="mord mathdefault">t</span><span class="mord mathdefault">o</span><span class="mord mathdefault">o</span><span class="mord mathdefault" style="margin-right:0.01968em;">l</span><span class="mord mathdefault" style="margin-right:0.13889em;">F</span><span class="mord mathdefault">i</span><span class="mord mathdefault" style="margin-right:0.01968em;">l</span><span class="mord mathdefault">e</span><span class="mord mathdefault" style="margin-right:0.10903em;">N</span><span class="mord mathdefault">a</span><span class="mord mathdefault">m</span><span class="mord mathdefault">e</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span></span></span></span>_POST[&quot;toolFileName&quot;];<br>
-$gb2312_filename = $toolFileName;</p>
-]]></content>
-    </entry>
-    <entry>
-        <title type="html"><![CDATA[学习代码审计系列-通达OA]]></title>
-        <id>https://1946dream.github.io/post/xue-xi-dai-ma-shen-ji-xi-lie-tong-da-oa/</id>
-        <link href="https://1946dream.github.io/post/xue-xi-dai-ma-shen-ji-xi-lie-tong-da-oa/">
-        </link>
-        <updated>2021-08-14T09:33:44.000Z</updated>
-        <content type="html"><![CDATA[<blockquote>
-<p>先把标题列上慢慢补充。</p>
-</blockquote>
-<h1 id="版本号">🎩版本号</h1>
-<p>OA内部版本号对应说明：<br>
-11.x为11.0版本，<br>
-10.x为2017版，9.x为2016版，<br>
-8.x为2015版，<br>
-7.x为2013增强版，<br>
-6.x为2013版，<br>
-5.1为2011增强版，<br>
-5.0为2011版，<br>
-3.6为2010版，<br>
-3.5为2009版，<br>
-3.4为2008增强版，<br>
-3.3为2008版，<br>
-3.2为2007第二版，<br>
-3.1为2007第一版。</p>
-<h1 id="源码下载">👓源码下载</h1>
-<p>https://cdndown.tongda2000.com/oa/2019/TDOA11.1.exe<br>
-https://cdndown.tongda2000.com/oa/2019/TDOA11.2.exe<br>
-https://cdndown.tongda2000.com/oa/2019/TDOA11.3.exe<br>
-https://cdndown.tongda2000.com/oa/2019/TDOA11.4.exe<br>
-https://cdndown.tongda2000.com/oa/2019/TDOA11.5.exe<br>
-https://cdndown.tongda2000.com/oa/2019/TDOA11.6.exe<br>
-https://cdndown.tongda2000.com/oa/2019/TDOA11.7.exe<br>
-https://cdndown.tongda2000.com/oa/2019/TDOA11.8.exe<br>
-https://cdndown.tongda2000.com/oa/2019/TDOA11.9.exe</p>
-]]></content>
-    </entry>
-</feed>
+        
+          <div class="next-post">
+            <div class="next">下一篇</div>
+            <a href="https://1946dream.github.io/post/mou-shan-v9zhong-duan-an-quan-xi-tong-chan-pin/">
+              <h3 class="post-title">
+                某山V9+终端安全系统产品
+              </h3>
+            </a>
+          </div>
+        
+
+        
+
+        <div class="site-footer">
+  Powered by <a href="https://github.com/getgridea/gridea" target="_blank">Gridea</a>
+  <a class="rss" href="https://1946dream.github.io//atom.xml" target="_blank">
+    <i class="ri-rss-line"></i> RSS
+  </a>
+</div>
+
+      </div>
+    </div>
+
+    <script>
+      hljs.initHighlightingOnLoad()
+
+      let mainNavLinks = document.querySelectorAll(".markdownIt-TOC a");
+
+      // This should probably be throttled.
+      // Especially because it triggers during smooth scrolling.
+      // https://lodash.com/docs/4.17.10#throttle
+      // You could do like...
+      // window.addEventListener("scroll", () => {
+      //    _.throttle(doThatStuff, 100);
+      // });
+      // Only not doing it here to keep this Pen dependency-free.
+
+      window.addEventListener("scroll", event => {
+        let fromTop = window.scrollY;
+
+        mainNavLinks.forEach((link, index) => {
+          let section = document.getElementById(decodeURI(link.hash).substring(1));
+          let nextSection = null
+          if (mainNavLinks[index + 1]) {
+            nextSection = document.getElementById(decodeURI(mainNavLinks[index + 1].hash).substring(1));
+          }
+          if (section.offsetTop <= fromTop) {
+            if (nextSection) {
+              if (nextSection.offsetTop > fromTop) {
+                link.classList.add("current");
+              } else {
+                link.classList.remove("current");    
+              }
+            } else {
+              link.classList.add("current");
+            }
+          } else {
+            link.classList.remove("current");
+          }
+        });
+      });
+
+    </script>
+  </body>
+</html>
