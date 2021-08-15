@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://1946dream.github.io/</id>
     <title>ChongMeng</title>
-    <updated>2021-08-15T04:01:55.801Z</updated>
+    <updated>2021-08-15T11:39:59.476Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://1946dream.github.io/"/>
     <link rel="self" href="https://1946dream.github.io/atom.xml"/>
@@ -17,6 +17,11 @@
         </link>
         <updated>2021-08-14T15:18:26.000Z</updated>
         <content type="html"><![CDATA[<h1 id="漏洞">😀漏洞</h1>
+<blockquote>
+<p>EXP均为网上搜集<br>
+https://www.t00ls.net/viewthread.php?tid=62018&amp;extra=&amp;page=1<br>
+https://forum.butian.net/share/359</p>
+</blockquote>
 <h2 id="getshell-1">😀Getshell-1：</h2>
 <h4 id="expshell路径为defaultrootuploadhtml">EXP:(shell路径为：/defaultroot/upload/html/)</h4>
 <pre><code>POST /defaultroot/upload/fileUpload.controller HTTP/1.1
